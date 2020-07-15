@@ -242,6 +242,12 @@ return [
             'icon' => 'fa fa-user'
         ],
         
+        [
+            'text' => 'Permissões',
+            'url'  => 'admin/permissions',
+            'icon' => 'fa fa-user-lock'
+        ],
+        
        /* [
             'text' => 'search',
             'search' => true,

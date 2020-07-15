@@ -12,20 +12,31 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::prefix('admin')->namespace('Admin\ACL')->group(function(){
+/**Profiles Routes */
+Route::prefix('profiles')->group(function(){
+    Route::any('/search','ProfileController@search')->name('profiles.search');
+    Route::get('/','ProfileController@index')->name('profiles.index');
+    Route::get('/create','ProfileController@create')->name('profiles.create');
+    Route::post('/store','ProfileController@store')->name('profiles.store');
+    Route::get('/{profile}/edit','ProfileController@edit')->name('profiles.edit');
+    Route::put('/{profile}/update','ProfileController@update')->name('profiles.update');
+    Route::delete('/{profile}/destroy','ProfileController@destroy')->name('profiles.destroy');
+    Route::get('/{profile}','ProfileController@show')->name('profiles.show');
+});
+/**Permission Routes */
+Route::prefix('permissions')->group(function(){
+    Route::any('/search','PermissionController@search')->name('permissions.search');
+    Route::get('/','PermissionController@index')->name('permissions.index');
+    Route::get('/create','PermissionController@create')->name('permissions.create');
+    Route::post('/store','PermissionController@store')->name('permissions.store');
+    Route::get('/{permission}/edit','PermissionController@edit')->name('permissions.edit');
+    Route::put('/{permission}/update','PermissionController@update')->name('permissions.update');
+    Route::delete('/{permission}/destroy','PermissionController@destroy')->name('permissions.destroy');
+    Route::get('/{permission}','PermissionController@show')->name('permissions.show');
+});
+});
 Route::prefix('admin')->namespace('Admin')->group(function(){
-
-    /**Profiles Routes */
-    Route::prefix('profiles')->group(function(){
-        Route::any('/search','ProfileController@search')->name('profiles.search');
-        Route::get('/','ProfileController@index')->name('profiles.index');
-        Route::get('/create','ProfileController@create')->name('profiles.create');
-        Route::post('/store','ProfileController@store')->name('profiles.store');
-        Route::get('/{profile}/edit','ProfileController@edit')->name('profiles.edit');
-        Route::put('/{profile}/update','ProfileController@update')->name('profiles.update');
-        Route::delete('/{profile}/destroy','ProfileController@destroy')->name('profiles.destroy');
-        Route::get('/{profile}','ProfileController@show')->name('profiles.show');
-    });
-
     /**
      * Plans Routes
      */
