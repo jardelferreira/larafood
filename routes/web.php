@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('admin')->namespace('Admin')->group(function(){
+
+    /**Profiles Routes */
+    Route::prefix('profiles')->group(function(){
+        Route::any('/search','ProfileController@search')->name('profiles.search');
+        Route::get('/','ProfileController@index')->name('profiles.index');
+        Route::get('/create','ProfileController@create')->name('profiles.create');
+        Route::post('/store','ProfileController@store')->name('profiles.store');
+        Route::get('/{profile}/edit','ProfileController@edit')->name('profiles.edit');
+        Route::put('/{profile}/update','ProfileController@update')->name('profiles.update');
+        Route::delete('/{profile}/destroy','ProfileController@destroy')->name('profiles.destroy');
+        Route::get('/{profile}','ProfileController@show')->name('profiles.show');
+    });
+
     /**
      * Plans Routes
      */

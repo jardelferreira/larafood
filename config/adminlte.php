@@ -236,6 +236,12 @@ return [
             'url'  => 'admin/plans',
             'icon' => "fa fa-file-alt"
         ],
+        [
+            'text' => 'Perfis',
+            'url'  => 'admin/profiles',
+            'icon' => 'fa fa-user'
+        ],
+        
        /* [
             'text' => 'search',
             'search' => true,
