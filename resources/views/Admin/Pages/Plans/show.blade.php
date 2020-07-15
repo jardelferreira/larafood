@@ -13,10 +13,11 @@
 
 @section('content')
     <div class="list-group">
+        <a href="{{route('details.plans.index',$plan->url)}}" class=" my-1 mx-1 btn btn-warning">clique para ver detalhes</a>
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{$plan->name}}</h5>
-                <small>R$ {{$plan->price}}</small>
+                <h5 class="mb-1">{{$plan->name}} </h5>
+                <small>R$ {{number_format($plan->price,2,",",".")}}</small>
             </div>
             <p class="mb-1">Descrição</p>
             <small>{{$plan->description}}</small>

@@ -15,6 +15,8 @@ class CreateDetailPlansTable extends Migration
     {
         Schema::create('detail_plans', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->foreignId('plan_id')->references('id')->on('plans');
             $table->timestamps();
         });
     }

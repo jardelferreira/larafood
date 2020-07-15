@@ -17,6 +17,9 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
      * Plans Routes
      */
  Route::prefix('plans')->group(function(){
+    /**Details Routes */
+    Route::get('{plan}/details', 'DetailPlanController@index')->name('details.plans.index');
+
      Route::any('/search','PlanController@search')->name('plans.search');
      Route::get('/', 'PlanController@index')->name('plans.index');
      Route::get('/create', 'PlanController@create')->name('plans.create');
