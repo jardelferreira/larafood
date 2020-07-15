@@ -98,8 +98,12 @@ class PlanController extends Controller
         if(!$plan){
             return redirect()->back()->withErrors('message', 'Não foi possivel deltar este plano');
         }
-        $plan->delete();
-        return redirect()->route('plans.index');
+        if(!$plan->details()->count()){
+            $plan->delete();
+            return redirect()->route('plans.index')->with('message','Plano deletado com sucesso');
+        }else{
+            return redirect()->back()->with('error','Não foi possível deletar este plano, existem detalhes vinculados a este plano');
+        }
     }
 
     public function search(Request $request, Plan $plan)

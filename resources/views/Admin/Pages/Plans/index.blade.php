@@ -24,6 +24,7 @@
             @endif
         </div>
         <div class="card-body">
+        @include('Admin.Includes.alerts')
             <table class="table table-striped table-inverse table-responsive">
                 <thead class="thead-inverse">
                     <tr>

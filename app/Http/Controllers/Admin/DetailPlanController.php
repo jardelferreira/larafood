@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DetailPlanRequest;
 use App\Models\DetailPlan;
 use App\Models\Plan;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class DetailPlanController extends Controller
         }
         return view('Admin.Pages.Plans.Details.index',[
             'plan' => $plan,
-            'details' => $plan->details()
+            'details' => $plan->details()->get()
         ]);
     }
 
@@ -30,9 +31,11 @@ class DetailPlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Plan $plan)
     {
-        //
+        return view('Admin.Pages.Plans.Details.create',[
+            'plan' => $plan
+        ]);
     }
 
     /**
@@ -41,9 +44,13 @@ class DetailPlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DetailPlanRequest $request,Plan $plan)
     {
-        //
+        if (!$plan) {
+            return redirect()->back();
+        }
+        $plan->details()->create($request->all());
+        return redirect()->route('details.plans.index',$plan->url);
     }
 
     /**
@@ -52,9 +59,12 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Plan $plan,DetailPlan $detail)
     {
-        //
+        return view('Admin.Pages.Plans.Details.show',[
+            'plan' => $plan,
+            'detail' => $detail,
+        ]);
     }
 
     /**
@@ -63,9 +73,15 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Plan $plan,DetailPlan $detail)
     {
-        //
+        if (!$detail) {
+            return redirect()->back();
+        }
+        return view('Admin.Pages.Plans.Details.edit',[
+            'plan' => $plan,
+            'detail' => $detail
+        ]);
     }
 
     /**
@@ -75,9 +91,13 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DetailPlanRequest $request,Plan $plan, DetailPlan $detail)
     {
-        //
+        if (!$detail) {
+            return redirect()->back();
+        }
+        $detail->update($request->all());
+        return redirect()->route('details.plans.show',[$plan->url,$detail->id]);
     }
 
     /**
@@ -86,8 +106,12 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Plan $plan,DetailPlan $detail)
     {
-        //
+        if (!$detail) {
+            return redirect()->back();
+        }
+        $detail->delete();
+        return redirect()->route('details.plans.index',$plan->url)->with('message', 'Detalhe deletado com sucesso!');
     }
 }
