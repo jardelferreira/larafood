@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\ACL;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
+use App\Models\Permission;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
@@ -106,5 +107,39 @@ class ProfileController extends Controller
             'profiles' => $profile->search($request->filter),
             'filters' => $request->except('_token')
         ]);
+    }
+
+    public function permissions(Profile $profile)
+    {
+        if (!$profile) {
+            return redirect()->back()->with('error','Perfil inexistente!');
+        }
+        return view('Admin.Pages.Profiles.Permissions.index',[
+            'permissions' => $profile->permissions()->paginate(),
+            'profile' => $profile
+        ]);
+    }
+
+    public function permissionsCreate(Profile $profile,Permission $permisson)
+    {
+        if (!$profile) {
+            return redirect()->back()->with('error','Perfil inexistente!');
+        }
+        return view('Admin.Pages.Profiles.Permissions.create',[
+            'permissions' => $permisson->paginate(),
+            'profile' => $profile
+        ]);
+    }
+
+    public function permissionProfileStore(Request $request, Profile $profile)
+    {
+        if (!$profile) {
+            return redirect()->back()->with('error','Perfil inexistente!');
+        }
+        if (!$request->permissions || count($request->permissions) < 1) {
+            return redirect()->back()->with('info','Selecione uma permissão!');
+        }
+        $profile->permissions()->attach($request->permissions);
+        return redirect()->route('profiles.permissions',$profile->id);
     }
 }

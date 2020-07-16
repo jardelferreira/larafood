@@ -15,4 +15,9 @@ class Profile extends Model
         ->orWhere('description', 'LIKE', "%$filter%")
         ->paginate(2);
     }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
 }

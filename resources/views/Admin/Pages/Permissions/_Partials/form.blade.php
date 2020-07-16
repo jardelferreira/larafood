@@ -1,7 +1,7 @@
 <div class="form-group">
-  <label for="name">Perfil</label>
-  <input type="text" value="{{$permission->name ?? old('name')}}" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="nome do perfil">
-  <small id="nameHelp" class="form-text text-muted">informe o nome do perfil</small>
+  <label for="name">Permissão</label>
+  <input type="text" value="{{$permission->name ?? old('name')}}" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="nome da permissão">
+  <small id="nameHelp" class="form-text text-muted">informe o nome da permissão</small>
 </div>
 <div class="form-group">
   <label for="description">Descrição</label>

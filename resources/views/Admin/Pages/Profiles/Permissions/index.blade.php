@@ -1,25 +1,26 @@
 @extends('adminlte::page')
 
-@section('title', 'Perfis')
+@section('title', 'Permissões do perfil')
 
 @section('content_header')
-<h1>Perfis <a href="{{route('profiles.create')}}" class="btn btn-success">Adicionar - <i class="fas fa-plus-circle    "></i></a></h1>
+<h1>Permissoes para {{$profile->name}}<a href="{{route('profiles.permissions.create',$profile->id)}}" class=" ml-1 btn btn-success">Adicionar - <i class="fas fa-plus-circle    "></i></a></h1>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active"><a href="{{route('profiles.index')}}">Perfis</a></li>
+    <li class="breadcrumb-item"><a href="{{route('profiles.index')}}">Perfis</a></li>
+    <li class="breadcrumb-item active"><a href="{{route('permissions.index')}}">Permissões</a></li>
 </ol>
 @stop
 @section('content')
 <div class="card">
     <div class="card-header">
-        <form action="{{route('profiles.search')}}" method="POST" class="form form-inline">
+        <form action="{{route('permissions.search')}}" method="POST" class="form form-inline">
             @csrf
             @method('POST')
             <input type="text" name="filter" value="{{$filters['filter'] ?? ''}}" placeholder="Pesquisar...">
             <button type="submit" class="btn btn-secondary"><i class="fas fa-search    "></i></button>
         </form>
         @if (isset($filters))
-            <a href="{{route('profiles.index')}}" class="btn btn-success">Resetar</a>
+            <a href="{{route('permissions.index')}}" class="btn btn-success">Resetar</a>
         @endif
     </div>
     <div class="card-body">
@@ -33,15 +34,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($profiles as $profile)
+                    @foreach ($permissions as $permission)
                         
                     <tr>
-                    <td scope="row">{{$profile->name}}</td>
-                    <td>{{$profile->description}}</td>
+                    <td scope="row">{{$permission->name}}</td>
+                    <td>{{$permission->description}}</td>
                      <td>
-                         <a href="{{route('profiles.show',$profile->id)}}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
-                         <a href="{{route('profiles.edit',$profile->id)}}" class="btn btn-info"><i class="fas fa-edit    "></i></a>
-                         <a href="{{route('profiles.permissions',$profile->id)}}" class="btn btn-primary"><i class="fas fa-lock"></i></a>
+                         <a href="#" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                     </td>  
                     </tr>
                     @endforeach
@@ -51,9 +50,9 @@
     </div>
     <div class="card-footer">
         @if(isset($filters))
-        {!! $profiles->appends($filters)->links() !!}
+        {!! $permissions->appends($filters)->links() !!}
         @else
-        {!! $profiles->links() !!}
+        {!! $permissions->links() !!}
         @endif
     </div>
 </div>

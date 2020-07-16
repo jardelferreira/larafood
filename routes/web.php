@@ -23,6 +23,11 @@ Route::prefix('profiles')->group(function(){
     Route::put('/{profile}/update','ProfileController@update')->name('profiles.update');
     Route::delete('/{profile}/destroy','ProfileController@destroy')->name('profiles.destroy');
     Route::get('/{profile}','ProfileController@show')->name('profiles.show');
+    /**Permissions Profiles Route */
+
+    Route::get('{profile}/permissions','ProfileController@permissions')->name('profiles.permissions');
+    Route::get('{profile}/permissions/create','ProfileController@permissionsCreate')->name('profiles.permissions.create');
+    Route::post('{profile}/permissions/store','ProfileController@permissionProfileStore')->name('profiles.permissions.store');
 });
 /**Permission Routes */
 Route::prefix('permissions')->group(function(){
@@ -63,6 +68,7 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
   * Admin Routes
   */
  Route::get('/','PlanController@index')->name('admin.index');
+ 
 });
 
 
