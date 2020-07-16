@@ -40,7 +40,7 @@
                     <td scope="row">{{$permission->name}}</td>
                     <td>{{$permission->description}}</td>
                      <td>
-                         <a href="#" class="btn btn-warning"><i class="fas fa-eye"></i></a>
+                         <a href="{{route('profiles.permissions.destroy',[$profile->id,$permission->id])}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>  
                     </tr>
                     @endforeach

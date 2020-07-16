@@ -120,14 +120,16 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function permissionsCreate(Profile $profile,Permission $permisson)
+    public function permissionsCreate(Profile $profile,Request $request)
     {
         if (!$profile) {
             return redirect()->back()->with('error','Perfil inexistente!');
         }
+        $filters = $request->except('_token');
         return view('Admin.Pages.Profiles.Permissions.create',[
-            'permissions' => $profile->permissionsAvailable(),
-            'profile' => $profile
+            'permissions' => $profile->permissionsAvailable($request->filter),
+            'profile' => $profile,
+            'filters' => $filters
         ]);
     }
 
@@ -140,6 +142,16 @@ class ProfileController extends Controller
             return redirect()->back()->with('info','Selecione uma permissão!');
         }
         $profile->permissions()->attach($request->permissions);
+        return redirect()->route('profiles.permissions',$profile->id);
+    }
+
+    public function profilesPermissionsDestroy(Profile $profile,Permission $permission)
+    {
+        if (!$profile || !$permission) {
+            return redirect()->back()->with('error','Perfil inexistente!');
+        }
+        $profile->permissions()->detach($permission);
+
         return redirect()->route('profiles.permissions',$profile->id);
     }
 }

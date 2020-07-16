@@ -107,4 +107,15 @@ class PermissionController extends Controller
             'filters' => $request->except('_token')
         ]);
     }
+    
+    public function profiles(Permission $permission)
+    {
+        if (!$permission) {
+            return redirect()->back()->with('error','Permissão não existe!');
+        }
+        return view('Admin.Pages.Permissions.Profiles.index',[
+            'permission' => $permission,
+            'profiles' => $permission->profiles()->paginate()
+        ]);
+    }
 }

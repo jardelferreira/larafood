@@ -14,7 +14,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <form action="{{route('permissions.search')}}" method="POST" class="form form-inline">
+        <form action="{{route('profiles.permissions.create',$profile->id)}}" method="POST" class="form form-inline">
             @csrf
             @method('POST')
             <input type="text" name="filter" value="{{$filters['filter'] ?? ''}}" placeholder="Pesquisar...">

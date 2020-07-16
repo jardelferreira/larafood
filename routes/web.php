@@ -26,11 +26,15 @@ Route::prefix('profiles')->group(function(){
     /**Permissions Profiles Route */
 
     Route::get('{profile}/permissions','ProfileController@permissions')->name('profiles.permissions');
-    Route::get('{profile}/permissions/create','ProfileController@permissionsCreate')->name('profiles.permissions.create');
+    Route::get('{profile}/permissions/{permission}/destroy','ProfileController@profilesPermissionsDestroy')->name('profiles.permissions.destroy');
+    Route::any('{profile}/permissions/create','ProfileController@permissionsCreate')->name('profiles.permissions.create');
     Route::post('{profile}/permissions/store','ProfileController@permissionProfileStore')->name('profiles.permissions.store');
 });
 /**Permission Routes */
 Route::prefix('permissions')->group(function(){
+    /**Permissions Profiles Routes */
+    Route::get('{permission}/profiles','PermissionController@profiles')->name('permissions.profiles');
+
     Route::any('/search','PermissionController@search')->name('permissions.search');
     Route::get('/','PermissionController@index')->name('permissions.index');
     Route::get('/create','PermissionController@create')->name('permissions.create');
