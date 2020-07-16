@@ -126,7 +126,7 @@ class ProfileController extends Controller
             return redirect()->back()->with('error','Perfil inexistente!');
         }
         return view('Admin.Pages.Profiles.Permissions.create',[
-            'permissions' => $permisson->paginate(),
+            'permissions' => $profile->permissionsAvailable(),
             'profile' => $profile
         ]);
     }
