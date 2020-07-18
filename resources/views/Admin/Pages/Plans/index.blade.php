@@ -44,7 +44,8 @@
                          <td>
                              <a href="{{route('plans.show',$plan->url)}}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                              <a href="{{route('plans.edit',$plan->url)}}" class="btn btn-info"><i class="fas fa-edit    "></i></a>
-                             <a href="{{route('details.plans.index',$plan->url)}}" class="btn btn-primary"><i class="fas fa-info-circle    "></i></a>
+                             <a href="{{route('details.plans.index',$plan->url)}}" class="btn btn-primary"><i class="fas fa-info-circle"></i></a>
+                             <a href="{{route('plans.profiles',$plan->url)}}" class="btn btn-success"><i class="fas fa-address-book    "></i></i></a>
                         </td>  
                         </tr>
                         @endforeach

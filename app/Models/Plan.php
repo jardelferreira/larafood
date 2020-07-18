@@ -8,9 +8,14 @@ class Plan extends Model
 {
     protected $fillable = ['name', 'url', 'description','price'];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName($key = 'url')
     {
-        return 'url';
+        return $key;
+    }
+
+    public function profiles()  
+    {
+        return  $this->belongsToMany(Profile::class);
     }
 
     public function details()
@@ -23,6 +28,19 @@ class Plan extends Model
         ->where('name', 'LIKE', "%$filter%")
         ->orWhere('description', 'LIKE', "%$filter%")
         ->paginate(2);
+    }
+    public function profilesAvailable($filter = null)
+    {
+        return Profile::whereNotIn('profiles.id', function($query){
+            $query->select('plan_profile.profile_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.profile_id={$this->id}");
+        })
+        ->where(function($queryFilter) use ($filter){
+            if($filter)
+            $queryFilter->where('profiles.name',"lIKE","%{$filter}%");
+        })
+            ->paginate();
     }
 }
 

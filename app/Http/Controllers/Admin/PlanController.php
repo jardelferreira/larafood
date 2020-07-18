@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Plan;
+use App\Models\Profile;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlanRequest;
@@ -113,4 +114,44 @@ class PlanController extends Controller
             'filters' => $request->except('_token')
         ]);
     }
+
+    public function profiles(Plan $plan)
+    {
+        return view('Admin.Pages.Plans.Profiles.index',[
+            'plan' => $plan,
+            'profiles' => $plan->profiles()->paginate()
+        ]);
+    }
+
+    public function plansProfilesDestroy(Plan $plan, Profile $profile)      
+    {
+        if(!$plan || !$profile){
+            return redirect()->back()->with('error','Perfil ou Plano não encontrado');
+        }
+        $plan->profiles()->detach($profile);
+        return redirect()->route('plans.profiles',$plan->url)->with('message','Perfil desvinculado com sucesso!');
+    }
+    
+    public function profilesCreate(Plan $plan,Request $request)
+    {
+        if(!$plan){
+            return redirect()->back()->with('error','Plano não encontrado');
+        }
+
+        return view('Admin.Pages.Plans.Profiles.create',[
+            'plan' => $plan,
+            'profiles' => $plan->profilesAvailable($request->filter),
+            'filters' => $request->filter
+        ]);
+    }
+
+    public function plansProfilesStore(Plan $plan, Request $request)
+    {
+        if(!$plan){
+            return redirect()->back()->with('error','Plano não encontrado');
+        }
+        $plan->profiles()->attach($request->profiles);
+        return redirect()->route('plans.profiles',$plan->url)->with('message','Perfil vinculado com sucesso!');
+    }
+
 }

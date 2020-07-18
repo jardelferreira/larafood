@@ -16,6 +16,11 @@ class Profile extends Model
         ->paginate(2);
     }
 
+    public function plans()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
+
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);

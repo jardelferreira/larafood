@@ -27,6 +27,7 @@ Route::prefix('profiles')->group(function(){
 
     Route::get('{profile}/permissions','ProfileController@permissions')->name('profiles.permissions');
     Route::get('{profile}/permissions/{permission}/destroy','ProfileController@profilesPermissionsDestroy')->name('profiles.permissions.destroy');
+    /** rota any porservir para search também */
     Route::any('{profile}/permissions/create','ProfileController@permissionsCreate')->name('profiles.permissions.create');
     Route::post('{profile}/permissions/store','ProfileController@permissionProfileStore')->name('profiles.permissions.store');
 });
@@ -50,6 +51,13 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
      * Plans Routes
      */
  Route::prefix('plans')->group(function(){
+
+    /** Plans x Profiles */
+    Route::get('{plan}/profiles','PlanController@profiles')->name('plans.profiles');
+    Route::get('{plan}/profiles/{profile}/destroy','PlanController@plansProfilesDestroy')->name('plans.profiles.destroy');
+    /** rota any porservir para search também */
+    Route::any('{plan}/profiles/create','PlanController@profilesCreate')->name('plans.profiles.create');
+    Route::post('{plan:id}/profiles/store','PlanController@plansProfilesStore')->name('plans.profiles.store');
     /**Details Routes */
     Route::post('{plan}/details/store', 'DetailPlanController@store')->name('details.plans.store');
     Route::get('{plan}/details/create', 'DetailPlanController@create')->name('details.plans.create');
