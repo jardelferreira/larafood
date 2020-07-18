@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin\ACL;
 
+use App\Models\Plan;
+use App\Models\Profile;
+use App\Models\Permission;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
-use App\Models\Permission;
-use App\Models\Profile;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -153,5 +154,44 @@ class ProfileController extends Controller
         $profile->permissions()->detach($permission);
 
         return redirect()->route('profiles.permissions',$profile->id);
+    }
+
+    public function plans(Profile $profile,Request $request)
+    {
+        if (!$profile) {
+            return redirect()->back()->with('error','Perfil inexistente!');
+        }
+        return view('Admin.Pages.Profiles.Plans.index',[
+            'profile' => $profile,
+            'plans' => $profile->plans()->paginate()
+        ]);
+    }
+
+    public function plansCreate(Profile $profile,Request $request)
+    {
+        if (!$profile) {
+            return redirect()->back()->with('error','Perfil inexistente!');
+        }
+        return view('Admin.Pages.Profiles.Plans.create',[
+            'profile' => $profile,
+            'plans' => $profile->plansAvailable($request->filter)
+        ]);
+    }
+
+    public function profilesplansStore(Profile $profile, Request $request)
+    {
+        if(!$profile){
+            return redirect()->back()->with('error','Plano não encontrado');
+        }
+        $profile->plans()->attach($request->plans);
+        return redirect()->route('profiles.plans',$profile->id)->with('message','Perfil vinculado com sucesso!');
+    }
+    public function profilesPlansDestroy(Profile $profile,Plan $plan)      
+    {
+        if(!$plan || !$profile){
+            return redirect()->back()->with('error','Perfil ou Plano não encontrado');
+        }
+        $profile->plans()->detach($plan);
+        return redirect()->route('profiles.plans',$profile->id)->with('message','Plano desvinculado com sucesso!');
     }
 }

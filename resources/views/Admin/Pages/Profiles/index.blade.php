@@ -42,6 +42,7 @@
                          <a href="{{route('profiles.show',$profile->id)}}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                          <a href="{{route('profiles.edit',$profile->id)}}" class="btn btn-info"><i class="fas fa-edit    "></i></a>
                          <a href="{{route('profiles.permissions',$profile->id)}}" class="btn btn-primary"><i class="fas fa-lock"></i></a>
+                         <a href="{{route('profiles.plans',$profile->id)}}" class="btn btn-dark"><i class="fas fa-file-alt"></i></a>
                     </td>  
                     </tr>
                     @endforeach

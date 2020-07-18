@@ -18,7 +18,7 @@ class Profile extends Model
 
     public function plans()
     {
-        return $this->belongsToMany(Profile::class);
+        return $this->belongsToMany(Plan::class);
     }
 
     public function permissions()
@@ -36,6 +36,20 @@ class Profile extends Model
         ->where(function($queryFilter) use ($filter){
             if($filter)
             $queryFilter->where('permissions.name',"lIKE","%{$filter}%");
+        })
+            ->paginate();
+    }
+
+    public function plansAvailable($filter = null)
+    {
+        return Plan::whereNotIn('plans.id', function($query){
+            $query->select('plan_profile.plan_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.plan_id={$this->id}");
+        })
+        ->where(function($queryFilter) use ($filter){
+            if($filter)
+            $queryFilter->where('plans.name',"lIKE","%{$filter}%");
         })
             ->paginate();
     }

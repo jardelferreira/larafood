@@ -13,8 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('admin')->namespace('Admin\ACL')->group(function(){
+    
 /**Profiles Routes */
 Route::prefix('profiles')->group(function(){
+
+    /** Plans x Profiles */
+    Route::get('{profile}/plans','ProfileController@plans')->name('profiles.plans');
+    Route::get('{profile}/plans/{plan}/destroy','ProfileController@profilesPlansDestroy')->name('profiles.plans.destroy');
+    /** rota any porservir para search também */
+    Route::any('{profile}/plans/create','ProfileController@plansCreate')->name('profiles.plans.create');
+    Route::post('{profile}/plans/store','ProfileController@profilesPlansStore')->name('profiles.plans.store');
+
     Route::any('/search','ProfileController@search')->name('profiles.search');
     Route::get('/','ProfileController@index')->name('profiles.index');
     Route::get('/create','ProfileController@create')->name('profiles.create');
@@ -52,7 +61,7 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
      */
  Route::prefix('plans')->group(function(){
 
-    /** Plans x Profiles */
+    /** Profiles x Plans */
     Route::get('{plan}/profiles','PlanController@profiles')->name('plans.profiles');
     Route::get('{plan}/profiles/{profile}/destroy','PlanController@plansProfilesDestroy')->name('plans.profiles.destroy');
     /** rota any porservir para search também */
