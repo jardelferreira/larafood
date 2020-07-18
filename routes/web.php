@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::prefix('admin')->namespace('Admin\ACL')->group(function(){
+Route::prefix('admin')->namespace('Admin\ACL')
+->middleware('auth')
+->group(function(){
     
 /**Profiles Routes */
 Route::prefix('profiles')->group(function(){
@@ -55,7 +58,9 @@ Route::prefix('permissions')->group(function(){
     Route::get('/{permission}','PermissionController@show')->name('permissions.show');
 });
 });
-Route::prefix('admin')->namespace('Admin')->group(function(){
+Route::prefix('admin')->namespace('Admin')
+->middleware('auth')
+->group(function(){
     /**
      * Plans Routes
      */
@@ -89,10 +94,9 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
   * Admin Routes
   */
  Route::get('/','PlanController@index')->name('admin.index');
- 
 });
+     Route::get('/', function(){
+         return view('welcome');
+     });
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
