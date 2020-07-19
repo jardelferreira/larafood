@@ -42,5 +42,10 @@ class Plan extends Model
         })
             ->paginate();
     }
+
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
+    }
 }
 

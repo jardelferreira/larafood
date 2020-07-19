@@ -12,6 +12,7 @@
 @stop
 
 @section('content')
+@include('Admin.Includes.alerts')
     <div class="list-group">
         <a href="{{route('details.plans.index',$plan->url)}}" class=" my-1 mx-1 btn btn-warning">clique para ver detalhes</a>
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
