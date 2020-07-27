@@ -14,4 +14,13 @@ class SiteController extends Controller
             'plans' => $plans->with('details')->orderBy('price','ASC')->get()
         ]);
     }
+
+    public function plan(Plan $plan)
+    {
+        if(!$plan){
+            return redirect()->back();
+        }
+        session()->put('plan',$plan);
+        return redirect()->route('register');
+    }
 }

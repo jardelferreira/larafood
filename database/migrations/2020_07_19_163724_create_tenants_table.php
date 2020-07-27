@@ -16,7 +16,7 @@ class CreateTenantsTable extends Migration
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('plan_id')->references('id')->on('plans')->onDelete('cascade');
-            
+            $table->uuid('uuid');
             $table->string('cnpj')->unique();
             $table->string('name')->unique();
             $table->string('url')->unique();

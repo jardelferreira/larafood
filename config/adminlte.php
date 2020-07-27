@@ -232,6 +232,11 @@ return [
 
     'menu' => [
         [
+            'text' => 'Home',
+            'url'  => '/',
+            'icon' => "fas fa-home"
+        ],
+        [
             'text' => 'Planos',
             'url'  => 'admin/plans',
             'icon' => "fa fa-file-alt"
@@ -246,6 +251,11 @@ return [
             'text' => 'Permissões',
             'url'  => 'admin/permissions',
             'icon' => 'fa fa-user-lock'
+        ],
+        [
+            'text' => 'Usuários',
+            'url'  => 'admin/users',
+            'icon' => 'fa fa-users'
         ],
         
        /* [

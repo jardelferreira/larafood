@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tenant extends Model
 {
     protected $fillable = [
-        'plan-id','cnpj','name','url','email'
+        'plan_id','cnpj','name','url','email','subscription','expires_at'
     ];
 
     public function users()

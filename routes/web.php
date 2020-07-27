@@ -91,6 +91,12 @@ Route::prefix('admin')->namespace('Admin')
             Route::delete('{plan}/details/{detail}/destroy', 'DetailPlanController@destroy')->name('details.plans.destroy');
             Route::get('{plan}/details/{detail}/show', 'DetailPlanController@show')->name('details.plans.show');
         });
+        /**Users Routes */
+        Route::prefix('users')->group(function(){
+            Route::any('{user}/create', 'UserController@create')->name('users.create');
+            Route::resources('','UserController');
+
+        });
         /**
          * Admin Routes
          */
@@ -99,6 +105,7 @@ Route::prefix('admin')->namespace('Admin')
 
 Route::prefix('/')->namespace('Site')->group(function(){
     Route::get('','SiteController@index')->name('site.index');
+    Route::get('plan/{plan}','SiteController@plan')->name('plan.subscription');
 });
 
 Auth::routes();
