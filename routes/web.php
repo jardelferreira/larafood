@@ -92,9 +92,15 @@ Route::prefix('admin')->namespace('Admin')
             Route::get('{plan}/details/{detail}/show', 'DetailPlanController@show')->name('details.plans.show');
         });
         /**Users Routes */
-        Route::prefix('users')->group(function(){
-            Route::any('{user}/create', 'UserController@create')->name('users.create');
-            Route::resources('','UserController');
+        Route::prefix('users')->name('users.')->group(function(){
+            Route::get('/','UserController@index')->name('index');
+            Route::get('/create','UserController@create')->name('create');
+            Route::get('/{user}/edit','UserController@edit')->name('edit');
+            Route::post('/store','UserController@store')->name('store');
+            Route::delete('/{user}/destroy','UserController@destroy')->name('destroy');
+            Route::put('/{user}/update','UserController@update')->name('update');
+            Route::get('/{user}','UserController@show')->name('show');
+            Route::any('/search', 'UserController@search')->name('search');
 
         });
         /**
