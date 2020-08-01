@@ -103,6 +103,18 @@ Route::prefix('admin')->namespace('Admin')
             Route::any('/search', 'UserController@search')->name('search');
 
         });
+        /**categories Routes */
+        Route::prefix('categories')->name('categories.')->group(function(){
+            Route::get('/','CategoryController@index')->name('index');
+            Route::get('/create','CategoryController@create')->name('create');
+            Route::get('/{category}/edit','CategoryController@edit')->name('edit');
+            Route::post('/store','CategoryController@store')->name('store');
+            Route::delete('/{category}/destroy','CategoryController@destroy')->name('destroy');
+            Route::put('/{category}/update','CategoryController@update')->name('update');
+            Route::get('/{category}','CategoryController@show')->name('show');
+            Route::any('/search', 'CategoryController@search')->name('search');
+
+        });
         /**
          * Admin Routes
          */
