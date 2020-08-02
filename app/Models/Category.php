@@ -23,4 +23,8 @@ class Category extends Model
         ->orWhere('name',$filter)
         ->paginate(2);
     }
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

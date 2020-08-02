@@ -115,6 +115,18 @@ Route::prefix('admin')->namespace('Admin')
             Route::any('/search', 'CategoryController@search')->name('search');
 
         });
+        /**products Routes */
+        Route::prefix('products')->name('products.')->group(function(){
+            Route::get('/','ProductController@index')->name('index');
+            Route::get('/create','ProductController@create')->name('create');
+            Route::get('/{product}/edit','ProductController@edit')->name('edit');
+            Route::post('/store','ProductController@store')->name('store');
+            Route::delete('/{product}/destroy','ProductController@destroy')->name('destroy');
+            Route::put('/{product}/update','ProductController@update')->name('update');
+            Route::get('/{product}','ProductController@show')->name('show');
+            Route::any('/search', 'ProductController@search')->name('search');
+
+        });
         /**
          * Admin Routes
          */
