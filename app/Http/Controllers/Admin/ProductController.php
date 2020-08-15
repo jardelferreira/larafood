@@ -43,7 +43,7 @@ class ProductController extends Controller
         $tenant = auth()->user()->tenant;
         $data = $request->all();
         if ($request->hasFile('image') && $request->image->isValid()) {
-          $data['image'] = $request->image->store("public/tenants/{$tenant->uuid}/products");
+          $data['image'] = $request->image->store("tenants/{$tenant->uuid}/products");
         }
         $product->create($data);
         return redirect()->route('products.index')->with('message','Categoria Cadastrada com sucesso!');

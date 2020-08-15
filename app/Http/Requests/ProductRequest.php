@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
         $rules = [
             'title' => "required|string|min:3|max:255|unique:products,title,{$this->segment(3)},id",
             'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
-            'image' => 'required|mimes:jpeg,png|max:1014',
+            'image' => 'required|mimes:jpeg,png,jpg|max:1014',
             'description' => "nullable|string|max:10000"
         ];
         if ($this->method() == "PUT") {

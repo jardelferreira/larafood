@@ -36,7 +36,7 @@
                     @foreach ($products as $product)
                         
                     <tr>
-                    <td scope="row"><img style="width: 70px;" src="{{asset("storage/$product->image")}}" alt="{{$product->title}}" ></td>
+                    <td scope="row"><img style="width: 70px; height: 50px;" src="{{asset("storage/$product->image")}}" alt="{{$product->title}}" ></td>
                     <td>{{$product->title}}</td>
                      <td>
                          <a href="{{route('products.show',$product->id)}}" class="btn btn-warning"><i class="fas fa-eye"></i></a>

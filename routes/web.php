@@ -125,6 +125,12 @@ Route::prefix('admin')->namespace('Admin')
             Route::put('/{product}/update','ProductController@update')->name('update');
             Route::get('/{product}','ProductController@show')->name('show');
             Route::any('/search', 'ProductController@search')->name('search');
+            /** Products x Categories */
+            Route::get('{product}/categories', 'CategoryProductController@categories')->name('categories');
+            Route::get('{product}/categories/{category}/destroy', 'CategoryProductController@detachCategoriesProduct')->name('categories.destroy');
+            /** rota any porservir para search também */
+            Route::any('{product}/categories/create', 'CategoryProductController@categoriesProductCreate')->name('categories.create');
+            Route::post('{product}/categories/store', 'CategoryProductController@attachCategoriesProduct')->name('categories.store');
 
         });
         /**
