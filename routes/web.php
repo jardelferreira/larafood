@@ -115,6 +115,18 @@ Route::prefix('admin')->namespace('Admin')
             Route::any('/search', 'CategoryController@search')->name('search');
 
         });
+        /**tables Routes */
+        Route::prefix('tables')->name('tables.')->group(function(){
+            Route::get('/','TableController@index')->name('index');
+            Route::get('/create','TableController@create')->name('create');
+            Route::get('/{table}/edit','TableController@edit')->name('edit');
+            Route::post('/store','TableController@store')->name('store');
+            Route::delete('/{table}/destroy','TableController@destroy')->name('destroy');
+            Route::put('/{table}/update','TableController@update')->name('update');
+            Route::get('/{table}','TableController@show')->name('show');
+            Route::any('/search', 'TableController@search')->name('search');
+
+        });
         /**products Routes */
         Route::prefix('products')->name('products.')->group(function(){
             Route::get('/','ProductController@index')->name('index');
