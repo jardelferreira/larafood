@@ -11,6 +11,10 @@ use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
+    public function __construct()       
+    {
+        $this->middleware(['can:profile']);
+    }
     /**
      * Display a listing of the resource.
      *

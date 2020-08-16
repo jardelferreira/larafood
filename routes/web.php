@@ -65,6 +65,8 @@ Route::prefix('admin')->namespace('Admin')
         /**
          * Plans Routes
          */
+        Route::get('teste-ad', function () {
+        });
         Route::prefix('plans')->group(function () {
 
             /** Profiles x Plans */

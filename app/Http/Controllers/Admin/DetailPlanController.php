@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class DetailPlanController extends Controller
 {
+    public function __construct()       
+    {
+        $this->middleware(['can:plans']);
+    }
     /**
      * Display a listing of the resource.
      *

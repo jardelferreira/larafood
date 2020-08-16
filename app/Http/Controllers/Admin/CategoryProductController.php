@@ -9,6 +9,10 @@ use App\Models\Category;
 
 class CategoryProductController extends Controller
 {
+    public function __construct()       
+    {
+        $this->middleware(['can:categories','can:products']);
+    }
     public function categories(Product $product)
     {
         if (!$product) {

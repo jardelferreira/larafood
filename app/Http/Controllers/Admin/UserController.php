@@ -8,7 +8,12 @@ use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
-{/**
+{
+    public function __construct()       
+    {
+        $this->middleware(['can:users']);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

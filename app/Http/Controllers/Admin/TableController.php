@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 
 class TableController extends Controller
 {
+    public function __construct()       
+    {
+        $this->middleware(['can:tables']);
+    }
      /**
      * Display a listing of the resource.
      *

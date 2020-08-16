@@ -9,6 +9,10 @@ use App\Http\Requests\PermissionRequest;
 
 class PermissionController extends Controller
 {
+    public function __construct()       
+    {
+        $this->middleware(['can:permission']);
+    }
     /**
      * Display a listing of the resource.
      *
