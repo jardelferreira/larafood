@@ -279,7 +279,12 @@ return [
             'icon' => 'fa fa-table',
             'can'  =>  'tables'
         ],
-        
+        [
+            'text' => 'Empresas',
+            'url'  => 'admin/tenants',
+            'icon' => 'fa fa-building',
+           // 'can'  =>  'tables'
+        ],
        /* [
             'text' => 'search',
             'search' => true,

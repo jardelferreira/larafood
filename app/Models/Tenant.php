@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tenant extends Model
 {
     protected $fillable = [
-        'plan_id','cnpj','name','url','email','subscription','expires_at'
+        'plan_id','cnpj','name','url','email','subscription','expires_at','logo'
     ];
 
     public function users()
@@ -18,4 +18,13 @@ class Tenant extends Model
     {
         return $this->belongsTo(Plan::class);
     }
+    public function search($filter = null)
+    {
+        return  $this
+        ->latest()
+        ->where('name', 'LIKE', "%$filter%")
+        ->orWhere('cnpj',$filter)
+        ->paginate(2);
+    }
+
 }

@@ -151,6 +151,19 @@ Route::prefix('admin')->namespace('Admin')
          * Admin Routes
          */
         Route::get('/', 'PlanController@index')->name('admin.index');
+        /**
+         * Tenant Routes
+         */
+        Route::prefix('tenants')->name('tenants.')->group(function(){
+            Route::get('/','TenantController@index')->name('index');
+            Route::get('/create','TenantController@create')->name('create');
+            Route::get('/{tenant}/edit','TenantController@edit')->name('edit');
+            Route::post('/store','TenantController@store')->name('store');
+            Route::delete('/{tenant}/destroy','TenantController@destroy')->name('destroy');
+            Route::put('/{tenant}/update','TenantController@update')->name('update');
+            Route::get('/{tenant}','TenantController@show')->name('show');
+            Route::any('/search', 'TenantController@search')->name('search');
+        });
     });
 
 Route::prefix('/')->namespace('Site')->group(function(){

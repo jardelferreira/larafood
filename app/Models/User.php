@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $query->where('tenant_id',auth()->user()->tenant_id);
     }
+
+    public function isSuper()
+    {
+        return in_array($this->email,config('acl.admins'));
+    }
 }
