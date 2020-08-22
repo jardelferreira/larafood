@@ -17,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->namespace('Admin\ACL')
     ->middleware('auth')
     ->group(function () {
+        /**Roles x Users Routes */
+        Route::prefix('users')->group(function(){
+            Route::get('{user}/roles', 'RoleUserController@roles')->name('users.roles');
+            Route::get('{user}/roles/{role}/destroy', 'RoleUserController@rolesUsersDestroy')->name('users.roles.destroy');
+            /** rota any porservir para search também */
+            Route::any('{user}/roles/create', 'RoleUserController@rolesUsersCreate')->name('users.roles.create');
+            Route::post('{user}/roles/store', 'RoleUserController@rolesUsersStore')->name('users.roles.store');
+        });
 
         /**Profiles Routes */
         Route::prefix('profiles')->group(function () {
@@ -43,6 +51,25 @@ Route::prefix('admin')->namespace('Admin\ACL')
             /** rota any porservir para search também */
             Route::any('{profile}/permissions/create', 'ProfileController@permissionsCreate')->name('profiles.permissions.create');
             Route::post('{profile}/permissions/store', 'ProfileController@permissionProfileStore')->name('profiles.permissions.store');
+        });
+        /**Roles Routes */
+        Route::prefix('roles')->group(function () {
+
+            Route::any('/search', 'RoleController@search')->name('roles.search');
+            Route::get('/', 'RoleController@index')->name('roles.index');
+            Route::get('/create', 'RoleController@create')->name('roles.create');
+            Route::post('/store', 'RoleController@store')->name('roles.store');
+            Route::get('/{role}/edit', 'RoleController@edit')->name('roles.edit');
+            Route::put('/{role}/update', 'RoleController@update')->name('roles.update');
+            Route::delete('/{role}/destroy', 'RoleController@destroy')->name('roles.destroy');
+            Route::get('/{role}', 'RoleController@show')->name('roles.show');
+            /**Permissions x Roles Route */
+
+            Route::get('{role}/permissions', 'RoleController@permissions')->name('roles.permissions');
+            Route::get('{role}/permissions/{permission}/destroy', 'RoleController@rolesPermissionsDestroy')->name('roles.permissions.destroy');
+            /** rota any porservir para search também */
+            Route::any('{role}/permissions/create', 'RoleController@rolesPermissionsCreate')->name('roles.permissions.create');
+            Route::post('{role}/permissions/store', 'RoleController@rolesPermissionsStore')->name('roles.permissions.store');
         });
         /**Permission Routes */
         Route::prefix('permissions')->group(function () {

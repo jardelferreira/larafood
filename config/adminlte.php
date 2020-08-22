@@ -232,6 +232,12 @@ return [
 
     'menu' => [
         [
+            'text' => 'Empresas',
+            'url'  => 'admin/tenants',
+            'icon' => 'fa fa-building',
+           // 'can'  =>  'tables'
+        ],
+        [
             'text' => 'Home',
             'url'  => '/',
             'icon' => "fas fa-home",
@@ -280,10 +286,10 @@ return [
             'can'  =>  'tables'
         ],
         [
-            'text' => 'Empresas',
-            'url'  => 'admin/tenants',
-            'icon' => 'fa fa-building',
-           // 'can'  =>  'tables'
+            'text' => 'Regras',
+            'url'  => 'admin/roles',
+            'icon' => 'fa fa-table',
+            //'can'  =>  'tables'
         ],
        /* [
             'text' => 'search',

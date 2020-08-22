@@ -1,18 +1,20 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Adicionar Usuários')
 
 @section('content_header')
-<h1>Usuários <a href="{{route('users.create')}}" class="btn btn-success">Adicionar - <i class="fas fa-plus-circle    "></i></a></h1>
+<h1>Usuários para {{$role->name}}</h1>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active"><a href="{{route('users.index')}}">Usuários</a></li>
+    <li class="breadcrumb-item"><a href="{{route('roles.index')}}">Cargos</a></li>
+    <li class="breadcrumb-item "><a href="{{route('users.index')}}">Usuários</a></li>
+    <li class="breadcrumb-item active"><a href="{{route('users.roles.create',$role->id)}}">Este perfil</a></li>
 </ol>
 @stop
 @section('content')
 <div class="card">
     <div class="card-header">
-        <form action="{{route('users.search')}}" method="POST" class="form form-inline">
+        <form action="{{route('users.roles.create',$role->id)}}" method="POST" class="form form-inline">
             @csrf
             @method('POST')
             <input type="text" name="filter" value="{{$filters['filter'] ?? ''}}" placeholder="Pesquisar...">
@@ -26,24 +28,28 @@
     @include('Admin.Includes.alerts')
         <table class="table table-striped table-inverse table-responsive">
             <thead class="thead-inverse">
+                <form action="{{route('users.roles.store',$role->id)}}" method="post">
+                    @csrf
+                    @method('POST')
                 <tr>
+                    <th><button type="submit" class="btn btn-success">Salvar</button></th>
                     <th>Nome</th>
-                    <th>Email</th>
-                    <th>Ações</th>
+                    <th>Descrição</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
-                        
+                        @foreach ($users as $permission)     
                     <tr>
-                    <td scope="row">{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
-                     <td>
-                         <a href="{{route('users.show',$user->id)}}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
-                         <a href="{{route('users.edit',$user->id)}}" class="btn btn-info"><i class="fas fa-edit"></i></a>
-                         <a href="{{route('users.roles',$user->id)}}" class="btn btn-info"><i class="fas fa-anchor "></i></a>
+                        <td class="input-group"><div class="input-group-prepend">
+                            <label class=" input-group-text">
+                                <input class="ml-3" type="checkbox" name="users[]" value="{{$permission->id}}">
+                            </label>
+                        </div></td>
+                        <td scope="row">{{$permission->name}}</td>
+                        <td>{{$permission->description}}</td>
                     </tr>
                     @endforeach
+                    </form>
                     
                 </tbody>
         </table>

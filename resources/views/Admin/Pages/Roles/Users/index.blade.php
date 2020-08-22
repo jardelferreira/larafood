@@ -1,18 +1,19 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Usuários do Cargo')
 
 @section('content_header')
-<h1>Usuários <a href="{{route('users.create')}}" class="btn btn-success">Adicionar - <i class="fas fa-plus-circle    "></i></a></h1>
+<h1>Usuários para {{$role->name}}<a href="{{route('roles.users.create',$role->id)}}" class=" ml-1 btn btn-success">Adicionar - <i class="fas fa-plus-circle    "></i></a></h1>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{route('roles.index')}}">Cargos</a></li>
     <li class="breadcrumb-item active"><a href="{{route('users.index')}}">Usuários</a></li>
 </ol>
 @stop
 @section('content')
 <div class="card">
     <div class="card-header">
-        <form action="{{route('users.search')}}" method="POST" class="form form-inline">
+        <form action="{{route('users.roles.create',$role->id)}}" method="POST" class="form form-inline">
             @csrf
             @method('POST')
             <input type="text" name="filter" value="{{$filters['filter'] ?? ''}}" placeholder="Pesquisar...">
@@ -28,7 +29,7 @@
             <thead class="thead-inverse">
                 <tr>
                     <th>Nome</th>
-                    <th>Email</th>
+                    <th>Descrição</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
@@ -39,9 +40,8 @@
                     <td scope="row">{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                      <td>
-                         <a href="{{route('users.show',$user->id)}}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
-                         <a href="{{route('users.edit',$user->id)}}" class="btn btn-info"><i class="fas fa-edit"></i></a>
-                         <a href="{{route('users.roles',$user->id)}}" class="btn btn-info"><i class="fas fa-anchor "></i></a>
+                         <a href="{{route('roles.users.destroy',[$role->id,$user->id])}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>  
                     </tr>
                     @endforeach
                     

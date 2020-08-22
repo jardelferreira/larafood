@@ -1,25 +1,26 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Permissões do perfil')
 
 @section('content_header')
-<h1>Usuários <a href="{{route('users.create')}}" class="btn btn-success">Adicionar - <i class="fas fa-plus-circle    "></i></a></h1>
+<h1>Permissões para {{$role->name}}<a href="{{route('roles.permissions.create',$role->id)}}" class=" ml-1 btn btn-success">Adicionar - <i class="fas fa-plus-circle    "></i></a></h1>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active"><a href="{{route('users.index')}}">Usuários</a></li>
+    <li class="breadcrumb-item"><a href="{{route('roles.index')}}">Cargos</a></li>
+    <li class="breadcrumb-item active"><a href="{{route('roles.permissions',$role->id)}}">Permissões</a></li>
 </ol>
 @stop
 @section('content')
 <div class="card">
     <div class="card-header">
-        <form action="{{route('users.search')}}" method="POST" class="form form-inline">
+        <form action="{{route('permissions.search')}}" method="POST" class="form form-inline">
             @csrf
             @method('POST')
             <input type="text" name="filter" value="{{$filters['filter'] ?? ''}}" placeholder="Pesquisar...">
             <button type="submit" class="btn btn-secondary"><i class="fas fa-search    "></i></button>
         </form>
         @if (isset($filters))
-            <a href="{{route('users.index')}}" class="btn btn-success">Resetar</a>
+            <a href="{{route('permissions.index')}}" class="btn btn-success">Resetar</a>
         @endif
     </div>
     <div class="card-body">
@@ -28,20 +29,19 @@
             <thead class="thead-inverse">
                 <tr>
                     <th>Nome</th>
-                    <th>Email</th>
+                    <th>Descrição</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($permissions as $permission)
                         
                     <tr>
-                    <td scope="row">{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
+                    <td scope="row">{{$permission->name}}</td>
+                    <td>{{$permission->description}}</td>
                      <td>
-                         <a href="{{route('users.show',$user->id)}}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
-                         <a href="{{route('users.edit',$user->id)}}" class="btn btn-info"><i class="fas fa-edit"></i></a>
-                         <a href="{{route('users.roles',$user->id)}}" class="btn btn-info"><i class="fas fa-anchor "></i></a>
+                         <a href="{{route('roles.permissions.destroy',[$role->id,$permission->id])}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>  
                     </tr>
                     @endforeach
                     
@@ -50,9 +50,9 @@
     </div>
     <div class="card-footer">
         @if(isset($filters))
-        {!! $users->appends($filters)->links() !!}
+        {!! $permissions->appends($filters)->links() !!}
         @else
-        {!! $users->links() !!}
+        {!! $permissions->links() !!}
         @endif
     </div>
 </div>

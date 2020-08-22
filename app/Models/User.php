@@ -68,4 +68,26 @@ class User extends Authenticatable
     {
         return in_array($this->email,config('acl.admins'));
     }
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function rolesAvailable($filter = null)
+    {
+        return Role::whereNotIn('roles.id', function ($query) {
+            $query->select('role_user.role_id');
+            $query->from('role_user');
+            $query->whereRaw("role_user.role_id={$this->id}");
+        })
+            ->where(function ($queryFilter) use ($filter) {
+                if ($filter)
+                    $queryFilter->where('roles.name', "lIKE", "%{$filter}%");
+            })
+            ->paginate();
+    }
 }
