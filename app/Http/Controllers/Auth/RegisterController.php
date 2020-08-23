@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\TenantCreated;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -72,6 +73,9 @@ class RegisterController extends Controller
             return redirect()->route('site.index');
         }
         $tenant = app(TenantServices::class);
-        return $tenant->make($plan,$data);
+        $user = $tenant->make($plan,$data);
+
+        event(new TenantCreated($user));
+        return $user;
     }
 }

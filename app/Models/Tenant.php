@@ -18,6 +18,14 @@ class Tenant extends Model
     {
         return $this->belongsTo(Plan::class);
     }
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
     public function search($filter = null)
     {
         return  $this

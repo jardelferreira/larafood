@@ -289,7 +289,7 @@ return [
             'text' => 'Regras',
             'url'  => 'admin/roles',
             'icon' => 'fa fa-table',
-            //'can'  =>  'tables'
+            'can'  =>  'roles'
         ],
        /* [
             'text' => 'search',

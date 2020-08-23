@@ -12,7 +12,7 @@ class RoleUserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['can:user']);
+        $this->middleware(['can:users']);
     }
     /**
      * Display a listing of the resource.
