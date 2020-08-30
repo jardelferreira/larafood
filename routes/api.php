@@ -10,3 +10,6 @@ Route::get('/category/{url}','Api\CategoryApiController@category');
 
 Route::get('/tables','Api\TableApiController@tables');
 Route::get('/table/{identify}','Api\TableApiController@table');
+
+Route::get('/products','Api\ProductApiController@products');
+Route::get('/product/{flag}','Api\ProductApiController@product');

@@ -26,7 +26,7 @@ class TableApiController extends Controller
     }
     return TableResource::collection($tables);
    }
-   public function table(string $identify)
+   public function table(TenantFormRequest $request, string $identify)
    {
     $table = $this->tableServices->getTableByIdentify($identify);
     if (!$table) {

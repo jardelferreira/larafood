@@ -13,11 +13,10 @@ class TableRepository implements TableRepositoryInterface
     }
     public function getTablesByTenantUuid(string $uuid)
     {
-       return $tables =  DB::table($this->table)->join('tenants','tenants.id','=','tables.tenant_id')
+       return DB::table($this->table)->join('tenants','tenants.id','=','tables.tenant_id')
         ->where('tenants.uuid',$uuid)
         ->select('tables.*')
         ->get();
-       // dd($uuid);
 
     }
 
