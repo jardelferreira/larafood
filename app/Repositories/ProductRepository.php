@@ -36,6 +36,6 @@ class ProductRepository implements ProductRepositoryInterface
     }
     public function getProduct(string $flag)
     {
-        return DB::table($this->table)->where('flag',$flag)->first();
+        return DB::table($this->table)->where('flag',$flag)->get()->toArray();
     }
 }

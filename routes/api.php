@@ -2,14 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/tenants','Api\TenantApiController@index');
-Route::get('/tenants/{uuid}','Api\TenantApiController@show');
+Route::prefix('v1')->namespace('Api')->group(function(){
+    Route::get('/tenants','TenantApiController@index');
+    Route::get('/tenants/{uuid}','TenantApiController@show');
+    
+    Route::get('/categories','CategoryApiController@categoriesByTenant');
+    Route::get('/category/{url}','CategoryApiController@category');
+    
+    Route::get('/tables','TableApiController@tables');
+    Route::get('/table/{identify}','TableApiController@table');
+    
+    Route::get('/products','ProductApiController@products');
+    Route::get('/product/{flag}','ProductApiController@product');
 
-Route::get('/categories','Api\CategoryApiController@categoriesByTenant');
-Route::get('/category/{url}','Api\CategoryApiController@category');
-
-Route::get('/tables','Api\TableApiController@tables');
-Route::get('/table/{identify}','Api\TableApiController@table');
-
-Route::get('/products','Api\ProductApiController@products');
-Route::get('/product/{flag}','Api\ProductApiController@product');
+});
