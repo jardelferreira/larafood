@@ -15,6 +15,7 @@ class CreateTablesTable extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
                 $table->id();
+                $table->uuid('uuid');
                 $table->foreignId('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
                 $table->string('identify')->unique();
                 $table->text('description')->nullable();

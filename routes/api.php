@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::post('/sanctum/token', 'Api\Auth\ClientController@auth');
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/me', 'Api\Auth\ClientController@getMe');
+    Route::post('/logout', 'Api\Auth\ClientController@logout');
+});
+
 Route::prefix('v1')->namespace('Api')->group(function(){
     Route::get('/tenants','TenantApiController@index');
     Route::get('/tenants/{uuid}','TenantApiController@show');
@@ -15,6 +21,7 @@ Route::prefix('v1')->namespace('Api')->group(function(){
     Route::get('/products','ProductApiController@products');
     Route::get('/product/{flag}','ProductApiController@product');
 
-    Route::post('/register', 'Auth\\RegisterController@register');
+    Route::post('/register', 'Auth\RegisterController@register');
+
 
 });
