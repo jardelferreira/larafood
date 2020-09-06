@@ -24,7 +24,8 @@ class CategoryApiController extends Controller
     }
     public function category(TenantFormRequest $request, $identify)
     {
-        $category = $this->categoryServices->getCategoryByUrl($identify);
+        $category = $this->categoryServices->getCategoryByUuid($identify);
+       // dd($identify);
         if(!$category){
             return response()->json(['message' => 'Categoria não encontrada'],404);
         }

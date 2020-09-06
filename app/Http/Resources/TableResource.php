@@ -16,7 +16,8 @@ class TableResource extends JsonResource
     {
         return [
             'nome' => $this->identify,
-            'descricao' => $this->description
+            'descricao' => $this->description,
+            'identify' => $this->uuid
         ];
     }
 }

@@ -20,8 +20,8 @@ class TableRepository implements TableRepositoryInterface
 
     }
 
-    public function getTableByIdentify(string $identify)
+    public function getTableByUuid(string $uuid)
     {
-        return DB::table($this->table)->where('identify',$identify)->get()->toArray();
+        return DB::table($this->table)->where('uuid',$uuid)->get()->toArray();
     }
 }

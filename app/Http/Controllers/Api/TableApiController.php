@@ -28,7 +28,7 @@ class TableApiController extends Controller
    }
    public function table(TenantFormRequest $request, string $identify)
    {
-    $table = $this->tableServices->getTableByIdentify($identify);
+    $table = $this->tableServices->getTableByUuid($identify);
     if (!$table) {
         return response()->json(['message' => 'Não foi possível localizar mesa'],404);
     }
