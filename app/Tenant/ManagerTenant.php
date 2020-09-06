@@ -6,7 +6,7 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ManagerTenant
 {
-    public function getTenantIdentify() :int
+    public function getTenantIdentify()
     {
         return auth()->check() ? auth()->user()->tenant_id: "";
     }

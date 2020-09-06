@@ -23,5 +23,7 @@ Route::prefix('v1')->namespace('Api')->group(function(){
 
     Route::post('/register', 'Auth\RegisterController@register');
 
+    Route::post('/orders','OrderApiController@store');
+    Route::get('/orders/{identify}','OrderApiController@order');
 
 });

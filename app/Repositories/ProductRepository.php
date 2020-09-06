@@ -37,6 +37,6 @@ class ProductRepository implements ProductRepositoryInterface
     }
     public function getProduct(string $identify)
     {
-        return DB::table($this->table)->where('uuid',$identify)->get();
+        return DB::table($this->table)->where('uuid',$identify)->first();
     }
 }

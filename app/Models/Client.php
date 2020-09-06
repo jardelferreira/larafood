@@ -17,5 +17,13 @@ class Client extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password'
     ];
-
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName($key = 'id')
+    {
+        return $key;
+    }
 }

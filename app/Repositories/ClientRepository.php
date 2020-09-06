@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Models\Client;
 use App\Repositories\Contracts\ClientRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class ClientRepository implements ClientRepositoryInterface
 {
@@ -19,6 +20,6 @@ class ClientRepository implements ClientRepositoryInterface
     }
     public function getClient(string $identify)
     {
-        # code...
+        return DB::table('clients')->where('uuid',$identify)->first();
     }
 }
