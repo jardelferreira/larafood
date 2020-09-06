@@ -20,8 +20,8 @@ class ProductServices
        return  $this->productRepository->getProductsByTenantId($tenant->id, $categories);
     }
 
-    public function getProduct(string $flag)
+    public function getProduct(string $identify)
     {
-        return $this->productRepository->getProduct($flag);
+        return $this->productRepository->getProduct($identify);
     }
 }

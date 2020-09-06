@@ -6,5 +6,5 @@ use App\Models\Client;
 interface ClientRepositoryInterface
 {
     public function registerClient(array $client);
-    public function getClient(int $clientId);
+    public function getClient(string $identify);
 }

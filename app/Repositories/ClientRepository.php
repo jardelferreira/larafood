@@ -17,7 +17,7 @@ class ClientRepository implements ClientRepositoryInterface
         $client['password'] = bcrypt($client['password']);
         return $this->client->create($client);
     }
-    public function getClient(int $clientId)
+    public function getClient(string $identify)
     {
         # code...
     }

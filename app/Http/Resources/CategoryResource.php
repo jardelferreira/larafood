@@ -18,7 +18,7 @@ class CategoryResource extends JsonResource
         return array(
             'nome' => $this->name,
             'descricao' => $this->description,
-            'url' => $this->url,
+            'identify' => $this->uuid,
             'criado-em' => Carbon::parse($this->created_at)->format('d/m/Y'),
         );
     }

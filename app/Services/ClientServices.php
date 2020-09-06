@@ -16,7 +16,7 @@ class ClientServices
         return $this->clientRepository->registerClient($client);
     }
 
-    public function getClient(int $id)
+    public function getClient(string $identify)
     {
         # code...
     }

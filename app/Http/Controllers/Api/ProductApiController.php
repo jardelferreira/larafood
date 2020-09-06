@@ -28,9 +28,9 @@ class ProductApiController extends Controller
         return ProductResource::collection($products);
     }
 
-    public function product(TenantFormRequest $request, string $flag)
+    public function product(TenantFormRequest $request, string $identify)
     {
-        $product = $this->productServices->getProduct($flag);
+        $product = $this->productServices->getProduct($identify);
         if(!$product){
             return response()->json(['message' => 'Não foi possível localizar o produto'],404);
         }
