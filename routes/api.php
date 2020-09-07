@@ -9,6 +9,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/v1/auth/orders','Api\OrderApiController@store');
     Route::get('/v1/auth/my-orders','Api\OrderApiController@myOrders');
+
+    Route::post('/v1/auth/orders/{identify}/evaluations','Api\EvaluationApiController@store');
+
 });
 
 Route::prefix('v1')->namespace('Api')->group(function(){

@@ -26,4 +26,14 @@ class Client extends Authenticatable
     {
         return $key;
     }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
