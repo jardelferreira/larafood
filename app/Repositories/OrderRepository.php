@@ -16,6 +16,12 @@ class OrderRepository implements OrderRepositoryInterface
         $this->entity = $order;
     }
 
+    public function getOrdersByClient(int $id)
+    {
+        $order = $this->entity->where('client_id',$id)
+            ->paginate();
+            return $order;
+    }
     public function createOrder(
         string $identify,
         float $total,
@@ -32,8 +38,8 @@ class OrderRepository implements OrderRepositoryInterface
             'tenant_id' => $tenantId,
             'comment' => $comment
         ];
-        $clientId ?? $data['client_id'] = $clientId;
-        $tableId ?? $data['table_id'] = $tableId;
+        $clientId != "" ? $data['client_id'] = $clientId:"";
+        $tableId != "" ? $data['table_id'] = $tableId:"";
         return $this->entity->create($data);
     }
 

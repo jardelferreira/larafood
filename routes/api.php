@@ -6,6 +6,9 @@ Route::post('/sanctum/token', 'Api\Auth\ClientController@auth');
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', 'Api\Auth\ClientController@getMe');
     Route::post('/logout', 'Api\Auth\ClientController@logout');
+
+    Route::post('/v1/auth/orders','Api\OrderApiController@store');
+    Route::get('/v1/auth/my-orders','Api\OrderApiController@myOrders');
 });
 
 Route::prefix('v1')->namespace('Api')->group(function(){

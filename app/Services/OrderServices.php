@@ -27,6 +27,12 @@ class OrderServices
         $this->productRepository = $productRepository;
     }
 
+    public function getOrdersByClient()
+    {
+        $id = $this->getClientId();
+        return $this->orderRepository->getOrdersByClient($id);
+    }
+
     public function createOrder(array $order)
     {
         $products = $this->getProductsByOrder($order['products']);
@@ -76,6 +82,7 @@ class OrderServices
     }
 
     private function getClientId(){
+        //dd(auth()->check());
         return auth()->check() ? auth()->user()->id : "";
     }
 
@@ -93,5 +100,10 @@ class OrderServices
             ]);
         }
        return $products;
+    }
+
+    public function getOrderByIdentify(string $identify)
+    {
+        return $this->orderRepository->getOrderByIdentify($identify);
     }
 }
