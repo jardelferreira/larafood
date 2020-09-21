@@ -25,10 +25,7 @@ class TenantApiController extends Controller
     public function show(string $uuid)
     {
         if (!$tenant = $this->tenantServices->getTenantByUuid($uuid)) {
-            return response()->json([
-          
-                'message' => 'Not Found',
-            ],404);
+            return response()->json(['message' => 'Not Found'],404);
         }
         return new TenantResource($tenant);
     }

@@ -21,7 +21,7 @@ Route::prefix('v1')->namespace('Api')->group(function(){
     Route::get('/categories','CategoryApiController@categoriesByTenant');
     Route::get('/category/{identify}','CategoryApiController@category');
     
-    Route::get('/tables','TableApiController@tables');
+    Route::get('/tables','TableApiController@tables'); 
     Route::get('/table/{identify}','TableApiController@table');
     
     Route::get('/products','ProductApiController@products');
