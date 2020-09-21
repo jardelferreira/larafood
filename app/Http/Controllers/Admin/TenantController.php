@@ -13,6 +13,7 @@ class TenantController extends Controller
 {
     public function __construct()       
     {
+        $this->middleware('can:tenants');
     }
     /**
      * Display a listing of the resource.

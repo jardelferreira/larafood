@@ -3,11 +3,28 @@
 namespace App\Services;
 
 use App\Models\Plan;
+use App\Models\Tenant;
+use App\Repositories\Contracts\TenantRepositoryInterface;
 use Illuminate\Support\Str;
 
 class TenantServices 
 {
- 
+    private $repository;
+    public function __construct(TenantRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+    
+    public function getAllTenants(int $per_page)
+    {
+        return $this->repository->getAllTenants($per_page);
+    }
+
+    public function getTenantByUuid($uuid)
+    {
+        return $this->repository->getTenantByUuid($uuid);
+    }
+
     public function make(Plan $plan,array $data)
     {
         $tenant = $this->storeTenant($plan,$data);

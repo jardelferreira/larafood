@@ -23,6 +23,7 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+        //dd(auth()->user()->tenant_id);
         $rules = [
             'title' => "required|string|min:3|max:255|unique:products,title,{$this->segment(3)},id",
             'price' => "required|regex:/^\d+(\.\d{1,2})?$/",

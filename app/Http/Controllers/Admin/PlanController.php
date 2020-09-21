@@ -13,7 +13,7 @@ class PlanController extends Controller
 {
     public function __construct()       
     {
-       //$this->middleware(['can:plans']);
+       $this->middleware(['can:plans']);
     }
     /**
      * Display a listing of the resource.
